@@ -5,14 +5,14 @@ cache = {}
 def load_cache(cache)
   file = File.open('cache', 'r')
   file.readlines.each do |line|
-    entry = line.split(':')
+    entry = line.split('=')
     cache[entry[0]] = entry[1]
   end
 end
 
 def print_factors(input, cache)
-  if cache[input]
-    return cache[input]
+  if cache[input.to_s]
+    return cache[input.to_s]
   end
   output = ""
   output += '{'
@@ -23,13 +23,14 @@ def print_factors(input, cache)
         result.push j
       end
     end
-    #puts i.to_s + ": " + result.to_s
     output += i.to_s + ': ' + result.to_s + ', '
   end
   output[output.length-1] == ' ' ? output.chomp!(', ') : nil
   output += '}'
   cache[input] = output
-  puts output
+  file = File.open('cache', 'a')
+  file.puts "#{input}=#{output}"
+  output
 end
 
 def factor(num, potential_factor)
@@ -37,4 +38,4 @@ def factor(num, potential_factor)
 end
 
 load_cache(cache)
-print_factors(input, cache)
+puts print_factors(input, cache)
