@@ -2,7 +2,7 @@
 
 To run:
 
-`ruby ./factors_caching`
+`ruby ./factors.rb`
 
 Since the output representation is up to me, I choose to have the output in sorted order, which allows me to use the cache for
 different permutations of the same input array and use the same result.
